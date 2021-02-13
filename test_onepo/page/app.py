@@ -1,3 +1,4 @@
+import yaml
 from appium import webdriver
 
 from test_onepo.page.base_page import BasePage
@@ -15,6 +16,7 @@ class App(BasePage):
             caps['appPackage'] = self._package
             caps['appActivity'] = self._activity
             caps['noReset'] = True
+            caps['udid'] = yaml.safe_load(open("../page/udid.yml"))['caps']['udid']
             self._driver = webdriver.Remote("http://localhost:4723/wd/hub",caps)
         else:
             self._driver.start_activity(self._package,self._activity)
